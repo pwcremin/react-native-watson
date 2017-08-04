@@ -25,7 +25,7 @@ Open XCode, click on your project, and great a new group called RNBluemix. Copy 
 
 ## Text To Speech
 
-```
+```javascript
 let RNTextToSpeech = require('react-native-bluemix');
 RNTextToSpeech.initialize("username", "password")
 ```
