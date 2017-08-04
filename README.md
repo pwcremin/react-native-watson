@@ -22,11 +22,49 @@ Open XCode, click on your project, and great a new group called RNBluemix. Copy 
 
 ![Alt text](https://cdn.rawgit.com/pwcremin/assets/776546d8/Screen%20Shot%202017-08-04%20at%2010.25.08%20AM.png)
 
+## Service Instances
+
+Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
+
+Follow these steps to create a service instance and obtain its credentials:
+
+1. Log in to Bluemix at [https://bluemix.net](https://bluemix.net).
+2. Create a service instance:
+    1. From the Dashboard, select "Use Services or APIs".
+    2. Select the service you want to use.
+    3. Click "Create".
+3. Copy your service credentials:
+    1. Click "Service Credentials" on the left side of the page.
+    2. Copy the service's `username` and `password` (or `api_key` for Alchemy).
+
+You will need to provide these service credentials in your application. For example:
+
+```javascript
+RNTextToSpeech.initialize("your-username-here", "your-password-here")
+```
+
+Note that service credentials are different from your Bluemix username and password.
+
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
 ## Text To Speech
 
 ```javascript
 let RNTextToSpeech = require('react-native-bluemix');
 RNTextToSpeech.initialize("username", "password")
+RNTextToSpeech.synthesize( "Text to speech, easy" )
+```
+
+Change the voice
+
+```javascript
+RNTextToSpeech.synthesize( "Text to speech, easy", "en-US_AllisonVoice" )
+```
+
+Get all voices that you can use
+
+```javascript
+RNTextToSpeech.getVoices()
+            .then( voices =>  voices.forEach( voice => console.log(voice.name) ) )
 ```
 
