@@ -1,10 +1,10 @@
 # react-native-bluemix
 [![npm version](https://badge.fury.io/js/react-native-bluemix.svg)](https://badge.fury.io/js/react-native-bluemix)
 
-There is example code for all service in the [rn-bluemix-boilerplace](https://github.com/pwcremin/rn-bluemix-boilerplate) repo.  This is also a great project to get you up and running quickly with a new React Native project.
-
 ## Overview
 React Native module for using select Bluemix services.  Access to Watson services is provided by wrapping the [Watson Developer Cloud](https://github.com/watson-developer-cloud/swift-sdk)
+
+There is example code for all service in the [rn-bluemix-boilerplace](https://github.com/pwcremin/rn-bluemix-boilerplate) repo.  This is also a great project to get you up and running quickly with a new React Native project.
 
 ### Services
 
