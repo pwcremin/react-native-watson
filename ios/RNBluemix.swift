@@ -1,6 +1,6 @@
 //
 //  RNTextToSpeech.swift
-//  RNBluemixSkeleton
+//  RNBluemixBoilerplate
 //
 //  Created by Patrick cremin on 8/2/17.
 //  Copyright © 2017 Facebook. All rights reserved.
@@ -8,8 +8,10 @@
 
 import Foundation
 import TextToSpeechV1
+import SpeechToTextV1
 import AVFoundation
 
+// TextToSpeech
 @objc(RNTextToSpeech)
 class RNTextToSpeech: NSObject {
   
@@ -77,3 +79,57 @@ class RNTextToSpeech: NSObject {
     
   }
 }
+
+// SpeechToText
+@objc(RNSpeechToText)
+class RNSpeechToText: RCTEventEmitter {
+  
+  var speechToText: SpeechToText?
+  var audioPlayer = AVAudioPlayer()
+  var callback: RCTResponseSenderBlock?
+  var hasListeners = false
+  
+  static let sharedInstance = RNSpeechToText()
+  
+  private override init() {}
+  
+  override func supportedEvents() -> [String]! {
+    return ["StreamingText"]
+  }
+  
+  @objc func initialize(_ username: String, password: String) -> Void {
+    speechToText = SpeechToText(username: username, password: password)
+  }
+  
+  @objc func startStreaming(_ errorCallback: @escaping RCTResponseSenderBlock) {
+    
+    var settings = RecognitionSettings(contentType: .opus)
+    settings.interimResults = true
+    
+    let failure = { (error: Error) in errorCallback([error]) }
+    
+    speechToText?.recognizeMicrophone(settings: settings, failure: failure) { results in
+      if(self.hasListeners)
+      {
+        self.sendEvent(withName: "StreamingText", body: results.bestTranscript)
+      }
+    }
+  }
+  
+  @objc func stopStreaming() {
+    speechToText?.stopRecognizeMicrophone()
+  }
+  
+  override func startObserving()
+  {
+    hasListeners = true
+  }
+  
+  override func stopObserving()
+  {
+    hasListeners = false
+  }
+}
+
+
+
