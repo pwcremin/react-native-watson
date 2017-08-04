@@ -86,6 +86,8 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index
 
 ## Text to Speech
 
+The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.
+
 ```javascript
 import {TextToSpeech} from 'react-native-bluemix';
 TextToSpeech.initialize("username", "password")
