@@ -1,6 +1,6 @@
 {
   "name": "react-native-bluemix",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "React Native module for IBM Bluemix services",
   "main": "index.js",
   "dependencies": {},
