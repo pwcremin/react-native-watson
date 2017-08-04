@@ -7,3 +7,16 @@ React Native module for using select Bluemix services.  Access to Watson service
 ### Services
 
 * [Text to Speech](#text-to-speech)
+
+## Install
+
+```shell
+npm install --save react-native-bluemix
+```
+
+## Manually link
+
+### iOS
+
+
+
