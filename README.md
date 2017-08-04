@@ -83,21 +83,35 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index
 ## Text To Speech
 
 ```javascript
-let RNTextToSpeech = require('react-native-bluemix');
-RNTextToSpeech.initialize("username", "password")
-RNTextToSpeech.synthesize( "Text to speech, easy" )
+import {TextToSpeech} from 'react-native-bluemix';
+TextToSpeech.initialize("username", "password")
+TextToSpeech.synthesize( "Text to speech, easy" )
 ```
 
 Change the voice
 
 ```javascript
-RNTextToSpeech.synthesize( "Text to speech, easy", "en-US_AllisonVoice" )
+TextToSpeech.synthesize( "Text to speech, easy", "en-US_AllisonVoice" )
 ```
 
 Get all voices that you can use
 
 ```javascript
-RNTextToSpeech.getVoices()
+TextToSpeech.getVoices()
             .then( voices =>  voices.forEach( voice => console.log(voice.name) ) )
 ```
 
+## Speech To Text
+
+```javascript
+import {SpeechToText} from 'react-native-bluemix';
+
+SpeechToText.initialize("username", "password")
+
+SpeechToText.startStreaming((error, text) =>
+        {
+            console.log(text)
+        })
+
+SpeechToText.stopStreaming()   
+```
