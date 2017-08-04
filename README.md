@@ -22,7 +22,7 @@ Open XCode, click on your project, and great a new group called RNBluemix. Copy 
 
 ![Alt text](https://cdn.rawgit.com/pwcremin/assets/776546d8/Screen%20Shot%202017-08-04%20at%2010.25.08%20AM.png)
 
-### Dependency Management
+#### Dependency Management
 
 We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the Swift SDK for your application.
 
