@@ -22,6 +22,39 @@ Open XCode, click on your project, and great a new group called RNBluemix. Copy 
 
 ![Alt text](https://cdn.rawgit.com/pwcremin/assets/776546d8/Screen%20Shot%202017-08-04%20at%2010.25.08%20AM.png)
 
+#### Dependency Management
+
+We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the Swift SDK for your application.
+
+You can install Carthage with [Homebrew](http://brew.sh/):
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+Then, navigate to the root directory of your project (where your .xcodeproj file is located) and create an empty `Cartfile` there:
+
+```bash
+$ touch Cartfile
+```
+
+To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
+
+```
+github "watson-developer-cloud/swift-sdk"
+```
+
+In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
+
+Then run the following command to build the dependencies and frameworks:
+
+```bash
+$ carthage update --platform iOS
+```
+
+Finally, drag-and-drop the built frameworks into your Xcode project.
+
 ## Service Instances
 
 Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
