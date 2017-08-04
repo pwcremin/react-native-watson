@@ -18,7 +18,12 @@ npm install --save react-native-bluemix
 
 ### iOS
 
-Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project
+Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
+
+```obj-c
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+```
 
 #### Dependency Management
 
