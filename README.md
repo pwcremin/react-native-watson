@@ -107,11 +107,14 @@ TextToSpeech.getVoices()
 
 ## Speech to Text
 
+The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. 
+
 ```javascript
 import {SpeechToText} from 'react-native-bluemix';
 
 SpeechToText.initialize("username", "password")
 
+// will transcribe microphone audio
 SpeechToText.startStreaming((error, text) =>
         {
             console.log(text)
