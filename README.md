@@ -79,7 +79,7 @@ Follow these steps to create a service instance and obtain its credentials:
 You will need to provide these service credentials in your application. For example:
 
 ```javascript
-RNTextToSpeech.initialize("your-username-here", "your-password-here")
+TextToSpeech.initialize("your-username-here", "your-password-here")
 ```
 
 Note that service credentials are different from your Bluemix username and password.
