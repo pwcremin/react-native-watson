@@ -1,11 +1,27 @@
 {
   "name": "react-native-bluemix",
   "version": "1.0.0",
-  "description": "",
+  "description": "React Native module for IBM Bluemix services",
   "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwcremin/react-native-bluemix.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "bluemix",
+    "ios"
+  ],
+  "author": "Patrick Cremin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pwcremin/react-native-bluemix/issues"
+  },
+  "homepage": "https://github.com/pwcremin/react-native-bluemix#readme"
 }
