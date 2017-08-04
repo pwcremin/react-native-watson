@@ -18,9 +18,7 @@ npm install --save react-native-bluemix
 
 ### iOS
 
-Open XCode, click on your project, and great a new group called RNBluemix. Copy all files from node_modules/react-native-bluemix/ios into this new group.
-
-![Alt text](https://cdn.rawgit.com/pwcremin/assets/776546d8/Screen%20Shot%202017-08-04%20at%2010.25.08%20AM.png)
+Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project
 
 #### Dependency Management
 
