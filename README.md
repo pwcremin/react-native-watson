@@ -7,6 +7,7 @@ React Native module for using select Bluemix services.  Access to Watson service
 ### Services
 
 * [Text to Speech](#text-to-speech)
+* [Speech to Text](#speech-to-text)
 
 ## Install
 
@@ -83,7 +84,7 @@ Note that service credentials are different from your Bluemix username and passw
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
 
-## Text To Speech
+## Text to Speech
 
 ```javascript
 import {TextToSpeech} from 'react-native-bluemix';
@@ -104,7 +105,7 @@ TextToSpeech.getVoices()
             .then( voices =>  voices.forEach( voice => console.log(voice.name) ) )
 ```
 
-## Speech To Text
+## Speech to Text
 
 ```javascript
 import {SpeechToText} from 'react-native-bluemix';
