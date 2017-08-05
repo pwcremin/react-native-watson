@@ -1,3 +1,11 @@
+npm-debug.log
+android.iml
+gradlew
+gradlew.bat
+local.properties
+.gradle
+gradle/
+
 build.sh
 .idea
 node_modules
