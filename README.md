@@ -16,19 +16,8 @@ There is example code for all services in the [rn-bluemix-boilerplace](https://g
 ```shell
 npm install --save react-native-bluemix
 ```
-### Android
 
-```react-native link react-native-bluemix```
-
-Add repository to your project Gradle file
-
-```
-allprojects {
-    repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    }
-}
-```
+## Manually link
 
 ### iOS
 
