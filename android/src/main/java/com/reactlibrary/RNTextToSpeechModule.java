@@ -58,11 +58,18 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void synthesize(String text, String voice, Promise promise) {
 
+        String voiceName = voice;
+
+        if(voiceName == null || voiceName.isEmpty())
+        {
+            voiceName = "en-US_AllisonVoice";
+        }
+
         try {
 
             StreamPlayer streamPlayer = new StreamPlayer();
 
-            streamPlayer.playStream(service.synthesize(text, new Voice(voice, null, null)).execute());
+            streamPlayer.playStream(service.synthesize(text, new Voice(voiceName, null, null)).execute());
 
         } catch (Exception e) {
             e.printStackTrace();
