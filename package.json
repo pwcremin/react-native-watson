@@ -65,7 +65,11 @@
     "react-native",
     "react-component",
     "bluemix",
-    "ios"
+    "ios",
+    "voice",
+    "speech",
+    "text-to-speech",
+    "speech-to-text"
   ],
   "license": "ISC",
   "main": "index.js",
