@@ -2,7 +2,7 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
 
 let {
     RNTextToSpeech,
-    //RNSpeechToTextModule
+    RNSpeechToText
 } = NativeModules
 
 console.log(Object.keys(NativeModules))
@@ -24,30 +24,30 @@ module.exports = {
             return RNTextToSpeech.getVoices();
         },
     },
-    //
-    // SpeechToText: {
-    //     speechToTextEmitter: new NativeEventEmitter(RNSpeechToText),
-    //
-    //     initialize: function ( username, password )
-    //     {
-    //         RNSpeechToText.initialize( username, password );
-    //     },
-    //
-    //     startStreaming(callback)
-    //     {
-    //         this.subscription = this.speechToTextEmitter.addListener(
-    //             'StreamingText',
-    //             (text) => callback(null, text)
-    //         );
-    //
-    //         RNSpeechToText.startStreaming(callback)
-    //     },
-    //
-    //     stopStreaming()
-    //     {
-    //         this.subscription.remove()
-    //
-    //         RNSpeechToText.stopStreaming()
-    //     }
-    // }
+
+    SpeechToText: {
+        speechToTextEmitter: new NativeEventEmitter(RNSpeechToText),
+
+        initialize: function ( username, password )
+        {
+            RNSpeechToText.initialize( username, password );
+        },
+
+        startStreaming(callback)
+        {
+            this.subscription = this.speechToTextEmitter.addListener(
+                'StreamingText',
+                (text) => callback(null, text)
+            );
+
+            RNSpeechToText.startStreaming(callback)
+        },
+
+        stopStreaming()
+        {
+            this.subscription.remove()
+
+            RNSpeechToText.stopStreaming()
+        }
+    }
 }
