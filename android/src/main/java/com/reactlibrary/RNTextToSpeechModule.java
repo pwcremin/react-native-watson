@@ -9,20 +9,15 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableArray;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
-import com.facebook.react.bridge.WritableNativeMap;
-
-import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
-
-import com.ibm.watson.developer_cloud.dialog.v1.model.Message;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
@@ -57,46 +52,38 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void synthesize(String text, String voice, Promise promise) {
+        InputStream inputStream = service.synthesize(text, Voice.EN_ALLISON).execute();
 
-        String voiceName = voice;
+        byte[] buf;
+        int size = 1024;
 
-        if(voiceName == null || voiceName.isEmpty())
-        {
-            voiceName = "en-US_AllisonVoice";
+        if (inputStream instanceof ByteArrayInputStream) {
+            try {
+                size = inputStream.available();
+            } catch (IOException e) {
+                promise.reject(null, e);
+            }
         }
+
+        buf = new byte[size];
+
+        audioTrack.play();
 
         try {
-
-            StreamPlayer streamPlayer = new StreamPlayer();
-
-            streamPlayer.playStream(service.synthesize(text, new Voice(voiceName, null, null)).execute());
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            int k;
+            while ((k = inputStream.read(buf)) != -1) {
+                audioTrack.write(buf, 0, k);
+            }
+        } catch (IOException e) {
+            promise.reject(null, e);
         }
-
     }
 
     @ReactMethod
     public void getVoices(Promise promise) {
         try {
             List<Voice> voices = service.getVoices().execute();
-
-            WritableArray voicesArray = new WritableNativeArray();
-
-            for(Voice voice : voices){
-                WritableMap voiceMap = new WritableNativeMap();
-
-                voiceMap.putString("name", voice.getName());
-                voiceMap.putString("url", voice.getUrl());
-                voiceMap.putString("description", voice.getDescription());
-                voiceMap.putString("gender", voice.getGender());
-                voiceMap.putString("language", voice.getLanguage());
-
-                voicesArray.pushMap(voiceMap);
-            }
-
-            promise.resolve(voicesArray);
+            promise.resolve(voices);
         } catch (Exception e) {
             promise.reject(null, e);
         }

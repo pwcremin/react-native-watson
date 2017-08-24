@@ -32,3 +32,14 @@ RCT_EXTERN_METHOD(startStreaming: (RCTResponseSenderBlock *)errorCallback)
 RCT_EXTERN_METHOD(stopStreaming)
 
 @end
+
+
+@interface RCT_EXTERN_MODULE(RNToneAnalyzer, NSObject)
+
+RCT_EXTERN_METHOD(initialize:(NSString *)username password:(NSString *)password)
+
+RCT_EXTERN_METHOD(getTone:(NSString *)ofText
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+
+@end

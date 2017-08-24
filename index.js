@@ -2,10 +2,9 @@ import { NativeEventEmitter, NativeModules } from 'react-native';
 
 let {
     RNTextToSpeech,
-    RNSpeechToText
+    RNSpeechToText,
+    RNToneAnalyzer
 } = NativeModules
-
-console.log(Object.keys(NativeModules))
 
 module.exports = {
     TextToSpeech: {
@@ -26,21 +25,21 @@ module.exports = {
     },
 
     SpeechToText: {
-        speechToTextEmitter: new NativeEventEmitter(RNSpeechToText),
+        speechToTextEmitter: new NativeEventEmitter( RNSpeechToText ),
 
         initialize: function ( username, password )
         {
             RNSpeechToText.initialize( username, password );
         },
 
-        startStreaming(callback)
+        startStreaming( callback )
         {
             this.subscription = this.speechToTextEmitter.addListener(
                 'StreamingText',
-                (text) => callback(null, text)
+                ( text ) => callback( null, text )
             );
 
-            RNSpeechToText.startStreaming(callback)
+            RNSpeechToText.startStreaming( callback )
         },
 
         stopStreaming()
@@ -48,6 +47,24 @@ module.exports = {
             this.subscription.remove()
 
             RNSpeechToText.stopStreaming()
+        }
+    },
+
+    ToneAnalyzer: {
+        tones: {
+            emotion: 'emotion',
+            language: 'language',
+            social: 'social'
+        },
+
+        initialize: function ( username, password )
+        {
+            RNToneAnalyzer.initialize( username, password );
+        },
+
+        getTone: function ( ofText, tones = ['emotion', 'language', 'social'], sentences = true, callback )
+        {
+            return RNToneAnalyzer.getTone( ofText )
         }
     }
 }
