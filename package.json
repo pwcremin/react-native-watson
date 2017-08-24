@@ -1,31 +1,93 @@
 {
-  "name": "react-native-bluemix",
-  "version": "1.2.3",
-  "description": "React Native module for IBM Bluemix services",
-  "main": "index.js",
+  "_args": [
+    [
+      {
+        "raw": "react-native-bluemix@1.2.1",
+        "scope": null,
+        "escapedName": "react-native-bluemix",
+        "name": "react-native-bluemix",
+        "rawSpec": "1.2.1",
+        "spec": "1.2.1",
+        "type": "version"
+      },
+      "/Users/patrickcremin/repo/RNBluemixBoilerplate"
+    ]
+  ],
+  "_from": "react-native-bluemix@1.2.1",
+  "_id": "react-native-bluemix@1.2.1",
+  "_inCache": true,
+  "_location": "/react-native-bluemix",
+  "_nodeVersion": "6.11.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-bluemix-1.2.1.tgz_1501900499974_0.8291807374916971"
+  },
+  "_npmUser": {
+    "name": "pwcremin",
+    "email": "pwcremin@gmail.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-bluemix@1.2.1",
+    "scope": null,
+    "escapedName": "react-native-bluemix",
+    "name": "react-native-bluemix",
+    "rawSpec": "1.2.1",
+    "spec": "1.2.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-bluemix/-/react-native-bluemix-1.2.1.tgz",
+  "_shasum": "c58e7d2444848c53c4938ff3e184aae8a56fe3bb",
+  "_shrinkwrap": null,
+  "_spec": "react-native-bluemix@1.2.1",
+  "_where": "/Users/patrickcremin/repo/RNBluemixBoilerplate",
+  "author": {
+    "name": "Patrick Cremin"
+  },
+  "bugs": {
+    "url": "https://github.com/pwcremin/react-native-bluemix/issues"
+  },
   "dependencies": {},
+  "description": "React Native module for IBM Bluemix services",
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {},
+  "dist": {
+    "shasum": "c58e7d2444848c53c4938ff3e184aae8a56fe3bb",
+    "tarball": "https://registry.npmjs.org/react-native-bluemix/-/react-native-bluemix-1.2.1.tgz"
   },
-  "peerDependencies": {
-    "react-native": "^0.41.2",
-    "react-native-windows": "0.41.0-rc.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pwcremin/react-native-bluemix.git"
-  },
+  "gitHead": "e8fa9d6b468e77fe53a002ecf9e75e40167bc5f8",
+  "homepage": "https://github.com/pwcremin/react-native-bluemix#readme",
   "keywords": [
     "react-native",
     "react-component",
     "bluemix",
-    "ios"
+    "ios",
+    "voice",
+    "speech",
+    "text-to-speech",
+    "speech-to-text"
   ],
-  "author": "Patrick Cremin",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pwcremin/react-native-bluemix/issues"
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "pwcremin",
+      "email": "pwcremin@gmail.com"
+    }
+  ],
+  "name": "react-native-bluemix",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwcremin/react-native-bluemix.git"
   },
-  "homepage": "https://github.com/pwcremin/react-native-bluemix#readme"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.2.8"
 }

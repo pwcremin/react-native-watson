@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -20,7 +20,9 @@ repositories {
 }
 
 dependencies {
+    compile "com.ibm.watson.developer_cloud:android-sdk:0.2.3"
     compile 'com.facebook.react:react-native:+'
     compile 'com.ibm.watson.developer_cloud:java-sdk:3.8.0'
+    compile('com.ibm.watson.developer_cloud:speech-to-text:3.8.1-SNAPSHOT')
 }
   
