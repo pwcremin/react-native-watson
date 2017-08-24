@@ -1,6 +1,6 @@
 {
   "name": "react-native-bluemix",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "React Native module for IBM Bluemix services",
   "main": "index.js",
   "dependencies": {},
@@ -17,16 +17,16 @@
     "url": "git+https://github.com/pwcremin/react-native-bluemix.git"
   },
   "keywords": [
-	"react-native",
-      	"react-component",
-      	"bluemix",
-     	"ios",
-	"android",
-     	"voice",
-     	"speech",
-     	"text-to-speech",
-     	"speech-to-text",
-	"tone-analyzer"
+    "react-native",
+    "react-component",
+    "bluemix",
+    "ios",
+    "android",
+    "voice",
+    "speech",
+    "text-to-speech",
+    "speech-to-text",
+    "tone-analyzer"
   ],
   "author": "Patrick Cremin",
   "license": "ISC",
