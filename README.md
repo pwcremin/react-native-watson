@@ -138,7 +138,6 @@ import {ToneAnalyzer} from 'react-native-bluemix';
 
 ToneAnalyzer.initialize("username", "password")
 
-// will transcribe microphone audio
 ToneAnalyzer.getTone( text )
     .then( toneAnalysis => console.log(JSON.stringify(toneAnalysis) )
 ```
