@@ -126,3 +126,19 @@ SpeechToText.startStreaming((error, text) =>
 
 SpeechToText.stopStreaming()   
 ```
+
+## Tone Analyzer
+
+The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
+
+Emotions identified include things like anger, fear, joy, sadness, and disgust. Identified social tendencies include things from the Big Five personality traits used by some psychologists. These include openness, conscientiousness, extraversion, agreeableness, and emotional range. Identified writing styles include confident, analytical, and tentative.
+
+```javascript
+import {ToneAnalyzer} from 'react-native-bluemix';
+
+ToneAnalyzer.initialize("username", "password")
+
+// will transcribe microphone audio
+ToneAnalyzer.getTone( text )
+    .then( toneAnalysis => console.log(JSON.stringify(toneAnalysis) )
+```
