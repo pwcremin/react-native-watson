@@ -10,6 +10,7 @@ There is example code for all services in the [rn-bluemix-boilerplace](https://g
 
 * [Text to Speech](#text-to-speech)
 * [Speech to Text](#speech-to-text)
+* [Tone Analyzer](#tone-analyzer)
 
 ## Install
 
