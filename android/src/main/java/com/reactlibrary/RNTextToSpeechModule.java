@@ -5,6 +5,7 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -80,23 +81,11 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getVoices(Promise promise) {
         try {
-            List<Voice> voices = service.getVoices().execute();
-
-            WritableArray voicesArray = new WritableNativeArray();
-
-            for(Voice voice : voices){
-                WritableMap voiceMap = new WritableNativeMap();
-
-                voiceMap.putString("name", voice.getName());
-                voiceMap.putString("url", voice.getUrl());
-                voiceMap.putString("description", voice.getDescription());
-                voiceMap.putString("gender", voice.getGender());
-                voiceMap.putString("language", voice.getLanguage());
-
-                voicesArray.pushMap(voiceMap);
-            }
-
-            promise.resolve(voicesArray);
+            promise.resolve(
+                    Arguments.makeNativeArray(
+                            service.getVoices().execute()
+                    )
+            );
         } catch (Exception e) {
             promise.reject(null, e);
         }

@@ -20,6 +20,7 @@ public class RNBluemixPackage implements ReactPackage {
 
         modules.add(new RNTextToSpeechModule(reactContext));
         modules.add(new RNSpeechToTextModule(reactContext));
+        modules.add(new RNToneAnalyzerModule(reactContext));
 
         return modules;
     }

@@ -65,6 +65,7 @@ module.exports = {
         getTone: function ( ofText, tones = ['emotion', 'language', 'social'], sentences = true, callback )
         {
             return RNToneAnalyzer.getTone( ofText )
+                .then( toneAnalysis => typeof toneAnalysis === 'string' ? JSON.parse(toneAnalysis) : toneAnalysis)
         }
     }
 }

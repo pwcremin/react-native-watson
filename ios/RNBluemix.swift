@@ -149,7 +149,8 @@ class RNToneAnalyzer: NSObject {
     
     let failure = { (error: Error) in reject(nil, nil, error) }
     
-    toneAnalyzer?.getTone(ofText: ofText, failure: failure){ tones in      
+    toneAnalyzer?.getTone(ofText: ofText, failure: failure){ tones in
+      
         resolve(tones.toDictionary())
     }
   }
