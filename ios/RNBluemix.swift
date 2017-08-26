@@ -64,12 +64,6 @@ class RNTextToSpeech: NSObject {
           ])
       }
       
-      enum VendingMachineError: Error {
-        case invalidSelection
-        case insufficientFunds(coinsNeeded: Int)
-        case outOfStock
-      }
-      
       resolve(voicesArray)
     }
     
