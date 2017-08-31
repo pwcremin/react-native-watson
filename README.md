@@ -60,7 +60,11 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Finally, drag-and-drop the built frameworks into your Xcode project.
+####Binaries
+
+Drag-and-drop the built frameworks into your Xcode project (put them in a Frameworks group for better management).  You will also need to click on your project and go to the General section.  Add all of the frameworks to Embedded Binaries.
+
+Note, before you can upload to itunesconnect your will need to strip unwanted architectures from the frameworks.  This is done easily with a build script.  See the following link for instructions: http://ikennd.ac/blog/2015/02/stripping-unwanted-architectures-from-dynamic-libraries-in-xcode/
 
 ## Service Instances
 
