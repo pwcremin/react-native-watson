@@ -16,11 +16,14 @@ There is example code for all services in the [rn-bluemix-boilerplate](https://g
 
 ```shell
 npm install --save react-native-bluemix
+
 ```
+## Android
+Android installation is done with ```react-native link react-native-bluemix```
 
-## Manually link
+## iOS
 
-### iOS
+### Manually link
 
 Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
 
@@ -60,7 +63,7 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-####Binaries
+##### Add the Watson Frameworks to your project
 
 Drag-and-drop the built frameworks into your Xcode project (put them in a Frameworks group for better management).  You will also need to click on your project and go to the General section.  Add all of the frameworks to Embedded Binaries.
 
