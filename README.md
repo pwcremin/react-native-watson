@@ -1,6 +1,6 @@
 # react-native-bluemix
 [![npm version](https://badge.fury.io/js/react-native-bluemix.svg)](https://badge.fury.io/js/react-native-bluemix)
-[![Downloads][downloads-image]][downloads-url]
+
 
 ## Overview
 React Native module (ios and android) for using select Bluemix services.  Access to Watson services is provided by wrapping the [Watson Developer Cloud](https://github.com/watson-developer-cloud/swift-sdk)
