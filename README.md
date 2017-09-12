@@ -67,7 +67,7 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-##### Add the Watson Frameworks to your project
+##### Add the Frameworks to your project
 
 Drag-and-drop the built frameworks into your Xcode project (put them in a Frameworks group for better management).  You will also need to click on your project in Xcode and go to the General section.  Add all of the frameworks to Embedded Binaries.
 
