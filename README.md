@@ -150,3 +150,28 @@ ToneAnalyzer.initialize("username", "password")
 ToneAnalyzer.getTone( text )
     .then( toneAnalysis => console.log(JSON.stringify(toneAnalysis) )
 ```
+
+## Natural Language Understanding
+Use [Natural Language Understanding](https://console.bluemix.net/docs/services/natural-language-understanding/index.html#about) to analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
+
+```javascript
+import { NaturalLanguageUnderstanding } from 'react-native-bluemix'
+
+NaturalLanguageUnderstanding.initialize( "username", "password" )
+
+let features = {
+            concepts: {
+                limit: 5
+            },
+            categories: true
+        }
+
+NaturalLanguageUnderstanding.analyzeContent( this.state.contentToAnalyze, features )
+    .then( results =>
+    {
+        console.log( JSON.stringify( results, null, "   " )  )
+    } )
+    .catch( error => {
+        console.log( "Error: " + error.message )
+    })
+```
