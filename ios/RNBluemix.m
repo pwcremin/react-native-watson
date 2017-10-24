@@ -43,3 +43,13 @@ RCT_EXTERN_METHOD(getTone:(NSString *)ofText
                   rejecter:(RCTPromiseRejectBlock)reject)
 
 @end
+
+
+@interface RCT_EXTERN_MODULE(RNNaturalLanguageUnderstanding, NSObject)
+
+RCT_EXTERN_METHOD(initialize:(NSString *)username password:(NSString *)password)
+
+RCT_EXTERN_METHOD(analyzeContent:(NSString *)textToAnalyze features:(NSDictionary *)features
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+@end
