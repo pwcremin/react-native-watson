@@ -1,6 +1,7 @@
 # react-native-bluemix
 [![npm version](https://badge.fury.io/js/react-native-bluemix.svg)](https://badge.fury.io/js/react-native-bluemix)
 
+
 ## Overview
 React Native module (ios and android) for using select Bluemix services.  Access to Watson services is provided by wrapping the [Watson Developer Cloud](https://github.com/watson-developer-cloud/swift-sdk)
 
@@ -16,11 +17,14 @@ There is example code for all services in the [rn-bluemix-boilerplate](https://g
 
 ```shell
 npm install --save react-native-bluemix
+
 ```
+## Android
+Android installation is done with ```react-native link react-native-bluemix```
 
-## Manually link
+## iOS
 
-### iOS
+### Manually link
 
 Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
 
@@ -60,7 +64,11 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Finally, drag-and-drop the built frameworks into your Xcode project.
+##### Add the Frameworks to your project
+
+Drag-and-drop the built frameworks into your Xcode project (put them in a Frameworks group for better management).  You will also need to click on your project in Xcode and go to the General section.  Add all of the frameworks to Embedded Binaries.
+
+Note, before you can upload to itunesconnect your will need to strip unwanted architectures from the frameworks.  This is done easily with a build script.  See the following link for instructions: http://ikennd.ac/blog/2015/02/stripping-unwanted-architectures-from-dynamic-libraries-in-xcode/
 
 ## Service Instances
 
