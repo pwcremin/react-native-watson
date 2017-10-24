@@ -159,14 +159,18 @@ import { NaturalLanguageUnderstanding } from 'react-native-bluemix'
 
 NaturalLanguageUnderstanding.initialize( "username", "password" )
 
-let features = {
-            concepts: {
-                limit: 5
-            },
-            categories: true
-        }
+let contentToAnalyze = {
+            text: "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
+}
 
-NaturalLanguageUnderstanding.analyzeContent( this.state.contentToAnalyze, features )
+let features = {
+    concepts: {
+        limit: 5
+    },
+    categories: true
+}
+
+NaturalLanguageUnderstanding.analyzeContent( contentToAnalyze, features )
     .then( results =>
     {
         console.log( JSON.stringify( results, null, "   " )  )
