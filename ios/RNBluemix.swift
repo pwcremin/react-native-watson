@@ -166,58 +166,71 @@ class RNNaturalLanguageUnderstanding: NSObject {
     naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: "2017-08-22")
   }
   
-  @objc func analyzeContent(_ textToAnalyze: String, features: [String : [String: Any]],
+  @objc func analyzeContent(_ contentToAnalyze: [String : Any], featuresDict: [String : Any],
                             resolver resolve: @escaping RCTPromiseResolveBlock,
                             rejecter reject: @escaping RCTPromiseRejectBlock
     ) -> Void
   {
+    //let features = featuresAny as! [String: [String: Any]]
     
-    var concepts: ConceptsOptions?
-    var emotion: EmotionOptions?
-    var entities: EntitiesOptions?
-    var keywords: KeywordsOptions?
-    var metadata: MetadataOptions?
-    var relations: RelationsOptions?
-    var semanticRoles: SemanticRolesOptions?
-    var sentiment: SentimentOptions?
-    var categories: CategoriesOptions?
+    var conceptsOptions: ConceptsOptions?
+    var emotionOptions: EmotionOptions?
+    var entitiesOptions: EntitiesOptions?
+    var keywordsOptions: KeywordsOptions?
+    var metadataOptions: MetadataOptions?
+    var relationsOptions: RelationsOptions?
+    var semanticRolesOptions: SemanticRolesOptions?
+    var sentimentOptions: SentimentOptions?
+    var categoriesOptions: CategoriesOptions?
     
-    for (key, value) in features {
-      switch key {
-      case "concepts":
-        concepts = ConceptsOptions( limit: value["limit"] as? Int, linkedData: value["linkedData"] as? Bool)
-      case "emotion":
-        emotion = EmotionOptions(document: value["document"] as? Bool, targets: value["targets"] as? [String])
-      case "entities":
-        entities = EntitiesOptions(limit: value["limit"] as? Int, model: value["model"] as? String, disambiguation: value["disambiguation"] as? Bool, sentiment: value["sentiment"] as? Bool)
-      case "keywords":
-        keywords = KeywordsOptions(limit: value["limit"] as? Int, sentiment: value["sentiment"] as? Bool)
-      case "metadata":
-        metadata = MetadataOptions()
-      case "relations":
-        relations = RelationsOptions(model: value["model"] as? String)
-      case "semanticRoles":
-        semanticRoles = SemanticRolesOptions(limit: value["limit"] as? Int, keywords: value["keywords"] as? Bool, entities: value["entities"] as? Bool, requireEntities: value["requireEntities"] as? Bool, disambiguate: value["disambiguate"] as? Bool)
-      case "sentiment":
-        sentiment = SentimentOptions(document: value["document"] as? Bool, targets: value["targets"] as? [String])
-      case "categories":
-        categories = CategoriesOptions()
-      default:
-        print("No features specified for NaturalLanguageUnderstanding.  You must have at least 1 feature.")
-      }
-      
-      let failure = { (error: Error) in reject(nil, nil, error) }
-      
-      //let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
-      
-      let features = Features(concepts: concepts, emotion: emotion, entities: entities, keywords: keywords, metadata: metadata, relations: relations, semanticRoles: semanticRoles, sentiment: sentiment, categories: categories)
-      
-      let parameters = Parameters(features: features, text: textToAnalyze)
-      
-      naturalLanguageUnderstanding?.analyzeContent(withParameters: parameters, failure: failure) { results in
-        resolve(results.toDictionary())
-      }
+    if let concepts = featuresDict["concepts"] as? [String: Any] {
+      conceptsOptions = ConceptsOptions( limit: concepts["limit"] as? Int, linkedData: concepts["linkedData"] as? Bool)
     }
+    
+    if let emotion = featuresDict["emotion"] as? [String: Any] {
+      emotionOptions = EmotionOptions(document: emotion["document"] as? Bool, targets: emotion["targets"] as? [String])
+    }
+    
+    if let entities = featuresDict["entities"] as? [String: Any] {
+      entitiesOptions = EntitiesOptions(limit: entities["limit"] as? Int, model: entities["model"] as? String, disambiguation: entities["disambiguation"] as? Bool, sentiment: entities["sentiment"] as? Bool)
+    }
+    
+    if let keywords = featuresDict["keywords"] as? [String: Any] {
+      keywordsOptions = KeywordsOptions(limit: keywords["limit"] as? Int, sentiment: keywords["sentiment"] as? Bool)
+    }
+    
+    if (featuresDict["metadata"] as? Bool) != nil {
+      metadataOptions = MetadataOptions()
+    }
+    
+    if let relations = featuresDict["relations"] as? [String: Any] {
+      relationsOptions = RelationsOptions(model: relations["model"] as? String)
+    }
+    
+    if let semanticRoles = featuresDict["semanticRoles"] as? [String: Any] {
+      semanticRolesOptions = SemanticRolesOptions(limit: semanticRoles["limit"] as? Int, keywords: semanticRoles["keywords"] as? Bool, entities: semanticRoles["entities"] as? Bool, requireEntities: semanticRoles["requireEntities"] as? Bool, disambiguate: semanticRoles["disambiguate"] as? Bool)
+    }
+    
+    if let sentiment = featuresDict["sentiment"] as? [String: Any] {
+      sentimentOptions = SentimentOptions(document: sentiment["document"] as? Bool, targets: sentiment["targets"] as? [String])
+    }
+    
+    if (featuresDict["categories"] as? Bool) != nil {
+      categoriesOptions = CategoriesOptions()
+    }
+    
+    let features = Features(concepts: conceptsOptions, emotion: emotionOptions, entities: entitiesOptions, keywords: keywordsOptions, metadata: metadataOptions, relations: relationsOptions, semanticRoles: semanticRolesOptions, sentiment: sentimentOptions, categories: categoriesOptions)
+    
+    
+    let html = URL(string: contentToAnalyze["html"] as? String ?? "" )
+    let parameters = Parameters(features: features, text: contentToAnalyze["text"] as? String, html: html, url: contentToAnalyze["url"] as? String)
+    
+    let failure = { (error: Error) in reject(nil, nil, error) }
+    
+    naturalLanguageUnderstanding?.analyzeContent(withParameters: parameters, failure: failure) { results in
+      resolve(results.toDictionary())
+    }
+    
   }
 }
 

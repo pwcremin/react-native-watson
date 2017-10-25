@@ -78,10 +78,10 @@ module.exports = {
         },
 
         /**
-         * @param {Object}  contentToAnalyze
-         * @param {string}  contentToAnalyze.text
-         * @param {string}  contentToAnalyze.url
-         * @param {string}  contentToAnalyze.html
+         * @param {Object}  contentToAnalyze Choose text, url or html
+         * @param {string}  contentToAnalyze.text The plain text to analyze
+         * @param {string}  contentToAnalyze.url Specific features to analyze the document for
+         * @param {string}  contentToAnalyze.html The web page to analyze
          *
          * @param {Object}  features.concepts
          * @param {number}  features.concepts.limit Maximum number of concepts to return
@@ -112,8 +112,8 @@ module.exports = {
          */
         analyzeContent: function ( contentToAnalyze, features )
         {
-            return RNNaturalLanguageUnderstanding.analyzeContent( contentToAnalyze, features )
-                .then( result => Platform.OS === "android" ? JSON.parse(result) : results )
+            return RNNaturalLanguageUnderstanding.analyzeContent(contentToAnalyze, features )
+                .then( results => Platform.OS === "android" ? JSON.parse(results) : results )
         }
     },
 

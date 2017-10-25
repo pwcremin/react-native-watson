@@ -49,7 +49,7 @@ RCT_EXTERN_METHOD(getTone:(NSString *)ofText
 
 RCT_EXTERN_METHOD(initialize:(NSString *)username password:(NSString *)password)
 
-RCT_EXTERN_METHOD(analyzeContent:(NSString *)textToAnalyze features:(NSDictionary *)features
+RCT_EXTERN_METHOD(analyzeContent:(NSDictionary *)contentToAnalyze featuresDict:(NSDictionary *)featuresDict
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 @end

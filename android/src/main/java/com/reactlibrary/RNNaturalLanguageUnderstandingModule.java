@@ -52,11 +52,11 @@ public class RNNaturalLanguageUnderstandingModule extends ReactContextBaseJavaMo
     }
 
     @ReactMethod
-    public void analyzeContent(String textToAnalyze, ReadableMap featuresMap, Promise promise) {
+    public void analyzeContent(ReadableMap contentToAnalyze, ReadableMap featuresMap, Promise promise) {
 
         Features features = this.getFeatures( featuresMap );
 
-        AnalyzeOptions parameters = this.getParameters(textToAnalyze, features);
+        AnalyzeOptions parameters = this.getParameters(contentToAnalyze, features);
 
         try {
             promise.resolve(
@@ -67,9 +67,23 @@ public class RNNaturalLanguageUnderstandingModule extends ReactContextBaseJavaMo
         }
     }
 
-    private AnalyzeOptions getParameters( String textToAnalyze, Features features )
+    private AnalyzeOptions getParameters( ReadableMap contentToAnalyze, Features features )
     {
-        return new AnalyzeOptions.Builder().url("www.cnn.com").features(features).build();
+        AnalyzeOptions.Builder analyzeBuilder = new AnalyzeOptions.Builder();
+
+        if (contentToAnalyze.hasKey("url")) {
+            analyzeBuilder.url(contentToAnalyze.getString("url"));
+        }
+
+        if (contentToAnalyze.hasKey("html")) {
+            analyzeBuilder.html(contentToAnalyze.getString("html"));
+        }
+
+        if (contentToAnalyze.hasKey("text")) {
+            analyzeBuilder.text(contentToAnalyze.getString("text"));
+        }
+        
+        return analyzeBuilder.features(features).build();
     }
 
     private Features getFeatures(ReadableMap featuresMap)
