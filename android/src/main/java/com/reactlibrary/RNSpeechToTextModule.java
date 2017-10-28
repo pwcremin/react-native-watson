@@ -72,7 +72,6 @@ public class RNSpeechToTextModule extends ReactContextBaseJavaModule {
 
     private RecognizeOptions getRecognizeOptions() {
         return new RecognizeOptions.Builder()
-                .continuous(true)
                 .contentType(ContentType.OPUS.toString())
                 .model("en-US_BroadbandModel")
                 .interimResults(true)

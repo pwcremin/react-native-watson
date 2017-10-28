@@ -1,3 +1,5 @@
+build.sh
+build_test.sh
 npm-debug.log
 android.iml
 gradlew

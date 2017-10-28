@@ -17,7 +17,6 @@ import com.facebook.react.bridge.WritableNativeMap;
 
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
 
-import com.ibm.watson.developer_cloud.dialog.v1.model.Message;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 
@@ -29,12 +28,13 @@ import java.util.List;
 public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     private ReactApplicationContext reactContext;
-    private TextToSpeech service = new TextToSpeech();
+    private TextToSpeech service;// = new TextToSpeech();
     private AudioTrack audioTrack;
 
     public RNTextToSpeechModule(ReactApplicationContext reactContext) {
         super(reactContext);
 
+        this.service = new TextToSpeech();
         this.reactContext = reactContext;
 
         int minBufferSize = AudioTrack.getMinBufferSize(

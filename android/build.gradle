@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion 19
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -20,9 +20,8 @@ repositories {
 }
 
 dependencies {
-    compile "com.ibm.watson.developer_cloud:android-sdk:0.2.3"
     compile 'com.facebook.react:react-native:+'
-    compile 'com.ibm.watson.developer_cloud:java-sdk:3.8.0'
-    compile('com.ibm.watson.developer_cloud:speech-to-text:0.4.2')
+    compile 'com.ibm.watson.developer_cloud:android-sdk:0.4.2'
+    compile 'com.ibm.watson.developer_cloud:java-sdk:4.0.0'
 }
   

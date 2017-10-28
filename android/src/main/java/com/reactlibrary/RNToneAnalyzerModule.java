@@ -16,7 +16,6 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream;
 
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.ToneAnalyzer;
-import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.Tone;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
 
@@ -50,9 +49,10 @@ public class RNToneAnalyzerModule extends ReactContextBaseJavaModule {
 
         try {
             // TODO let them set tones and sentences
-            ToneOptions options = new ToneOptions.Builder().build();
+            // TODO needs to handle html and other options for getting tone
+            ToneOptions options = new ToneOptions.Builder().text(text).build();
 
-            ToneAnalysis toneAnalysis = service.getTone(text, options).execute();
+            ToneAnalysis toneAnalysis = service.tone(options).execute();
 
             promise.resolve(toneAnalysis.toString());
         }
