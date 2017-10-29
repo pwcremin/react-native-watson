@@ -22,6 +22,9 @@ npm install --save react-native-bluemix
 ## Android
 Android installation is done with ```react-native link react-native-bluemix```
 
+minSdkVersion 19
+targetSdkVersion 26
+
 ## iOS
 
 ### Manually link
