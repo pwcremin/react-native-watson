@@ -10,6 +10,7 @@ React Native module (ios and android) for using select Bluemix services.  Access
 * [Text to Speech](#text-to-speech)
 * [Speech to Text](#speech-to-text)
 * [Tone Analyzer](#tone-analyzer)
+* [Natural Language Understanding](#natural-language-understanding)
 
 ## Install
 
