@@ -72,8 +72,10 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
             streamPlayer.playStream(service.synthesize(text, new Voice(voiceName, null, null)).execute());
 
+            promise.resolve(true);
+
         } catch (Exception e) {
-            e.printStackTrace();
+            promise.reject(e);
         }
 
     }
