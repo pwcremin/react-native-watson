@@ -15,7 +15,7 @@ React Native module (ios and android) for using select Watson services.  Access 
 ## Install
 
 ```shell
-npm install --save react-native-bluemix
+npm install --save react-native-watson
 
 ```
 ## Android
