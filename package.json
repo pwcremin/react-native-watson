@@ -1,7 +1,7 @@
 {
-  "name": "react-native-bluemix",
+  "name": "react-native-watson",
   "version": "1.4.3",
-  "description": "React Native module for IBM Bluemix services",
+  "description": "React Native module for IBM Watson services",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {},
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pwcremin/react-native-bluemix.git"
+    "url": "git+https://github.com/pwcremin/react-native-watson.git"
   },
   "keywords": [
     "react-native",
     "react-component",
-    "bluemix",
+    "watson",
     "ios",
     "android",
     "voice",
@@ -31,7 +31,7 @@
   "author": "Patrick Cremin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pwcremin/react-native-bluemix/issues"
+    "url": "https://github.com/pwcremin/react-native-watson/issues"
   },
-  "homepage": "https://github.com/pwcremin/react-native-bluemix#readme"
+  "homepage": "https://github.com/pwcremin/react-native-watson#readme"
 }
