@@ -1,6 +1,6 @@
 {
   "name": "react-native-watson",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "React Native module for IBM Watson services",
   "main": "index.js",
   "dependencies": {},
