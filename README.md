@@ -55,7 +55,7 @@ $ touch Cartfile
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
 
 ```
-github "watson-developer-cloud/swift-sdk == 0.18"
+github "watson-developer-cloud/swift-sdk" == 0.18
 ```
 
 In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
