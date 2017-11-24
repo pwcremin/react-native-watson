@@ -93,7 +93,7 @@ You will need to provide these service credentials in your application. For exam
 TextToSpeech.initialize("your-username-here", "your-password-here")
 ```
 
-Note that service credentials are different from your Bluemix username and password.
+Note that service credentials are different from your IBM Cloud username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and IBM Cloud.
 
