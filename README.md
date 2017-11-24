@@ -74,11 +74,11 @@ Note, before you can upload to itunesconnect your will need to strip unwanted ar
 
 ## Service Instances
 
-Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
+Services are instantiated using the [IBM Cloud](https://www.ibm.com/cloud/).
 
 Follow these steps to create a service instance and obtain its credentials:
 
-1. Log in to Bluemix at [https://bluemix.net](https://bluemix.net).
+1. Log in to IBM Cloud at [https://www.ibm.com/cloud/](https://www.ibm.com/cloud/).
 2. Create a service instance:
     1. From the Dashboard, select "Use Services or APIs".
     2. Select the service you want to use.
@@ -93,16 +93,16 @@ You will need to provide these service credentials in your application. For exam
 TextToSpeech.initialize("your-username-here", "your-password-here")
 ```
 
-Note that service credentials are different from your Bluemix username and password.
+Note that service credentials are different from your IBM Cloud username and password.
 
-See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and IBM Cloud.
 
 ## Text to Speech
 
 The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.
 
 ```javascript
-import {TextToSpeech} from 'react-native-bluemix';
+import {TextToSpeech} from 'react-native-watson';
 TextToSpeech.initialize("username", "password")
 TextToSpeech.synthesize( "Text to speech, easy" )
 ```
@@ -125,7 +125,7 @@ TextToSpeech.getVoices()
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. 
 
 ```javascript
-import {SpeechToText} from 'react-native-bluemix';
+import {SpeechToText} from 'react-native-watson';
 
 SpeechToText.initialize("username", "password")
 
@@ -145,7 +145,7 @@ The IBM Watson Tone Analyzer service can be used to discover, understand, and re
 Emotions identified include things like anger, fear, joy, sadness, and disgust. Identified social tendencies include things from the Big Five personality traits used by some psychologists. These include openness, conscientiousness, extraversion, agreeableness, and emotional range. Identified writing styles include confident, analytical, and tentative.
 
 ```javascript
-import {ToneAnalyzer} from 'react-native-bluemix';
+import {ToneAnalyzer} from 'react-native-watson';
 
 ToneAnalyzer.initialize("username", "password")
 
@@ -157,7 +157,7 @@ ToneAnalyzer.getTone( text )
 Use [Natural Language Understanding](https://console.bluemix.net/docs/services/natural-language-understanding/index.html#about) to analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
 
 ```javascript
-import { NaturalLanguageUnderstanding } from 'react-native-bluemix'
+import { NaturalLanguageUnderstanding } from 'react-native-watson'
 
 NaturalLanguageUnderstanding.initialize( "username", "password" )
 
