@@ -28,7 +28,7 @@ targetSdkVersion 26
 
 ### Manually link
 
-Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-watson/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
+Copy RNWatson.m and RNWatson.swift from node_modules/react-native-watson/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
 
 ```obj-c
 #import <React/RCTBridgeModule.h>
