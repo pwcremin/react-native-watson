@@ -1,5 +1,5 @@
 # react-native-watson
-[![npm version](https://badge.fury.io/js/react-native-bluemix.svg)](https://badge.fury.io/js/react-native-watson)
+[![npm version](https://badge.fury.io/js/react-native-watson.svg)](https://badge.fury.io/js/react-native-watson)
 
 
 ## Overview
@@ -19,7 +19,7 @@ npm install --save react-native-watson
 
 ```
 ## Android
-Android installation is done with ```react-native link react-native-bluemix```
+Android installation is done with ```react-native link react-native-watson```
 
 minSdkVersion 19
 targetSdkVersion 26
@@ -28,7 +28,7 @@ targetSdkVersion 26
 
 ### Manually link
 
-Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-bluemix/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
+Copy RNBluemix.m and RNBluemix.swift from node_modules/react-native-watson/ios into your project.  You will be prompted to create a bridging header.  Accept and place the below into the header:
 
 ```obj-c
 #import <React/RCTBridgeModule.h>
@@ -55,7 +55,7 @@ $ touch Cartfile
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
 
 ```
-github "watson-developer-cloud/swift-sdk"
+github "watson-developer-cloud/swift-sdk == 0.18"
 ```
 
 In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
