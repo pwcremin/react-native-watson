@@ -1,7 +1,4 @@
 //
-//  RNTextToSpeech.swift
-//  RNBluemixBoilerplate
-//
 //  Created by Patrick cremin on 8/2/17.
 //  Copyright © 2017 Facebook. All rights reserved.
 //
