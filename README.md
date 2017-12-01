@@ -100,7 +100,7 @@ See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index
 
 With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-To use Conversation with React Native, first creation your conversation bot and get your workspace_id.  Read this [quick tutorial](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot/) on creating a bot.
+To use Conversation with React Native, first create your conversation bot and get your workspaceId.  Read this [quick tutorial](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot/) on creating a bot.
 
 The following example shows how to start a conversation with the Conversation service:
 
