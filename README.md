@@ -108,6 +108,7 @@ The following example shows how to start a conversation with the Conversation se
 import { Conversation } from 'react-native-watson'
 
 Conversation.initialize( "user", "password" )
+let workspaceId="your_workspace_id"
 
 // To start the conversation, send a message with only the workspaceId
 Conversation.message(workspaceId)
@@ -123,7 +124,7 @@ let input = {
                 context: this.state.context
             }
 
-Conversation.message(this.workspaceId, input)
+Conversation.message(workspaceId, input)
     .then(response => {
         console.log(JSON.stringify(response))
         this.setState({output: response.output.text, context: response.context})
