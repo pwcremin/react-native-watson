@@ -7,6 +7,7 @@ React Native module (ios and android) for using select Watson services.  Access 
 
 ### Services
 
+* [Conversation](#conversation)
 * [Text to Speech](#text-to-speech)
 * [Speech to Text](#speech-to-text)
 * [Tone Analyzer](#tone-analyzer)
@@ -94,6 +95,40 @@ TextToSpeech.initialize("your-username-here", "your-password-here")
 Note that service credentials are different from your IBM Cloud username and password.
 
 See [Getting Started](https://www.ibm.com/watson/developercloud/doc/common/index.html) for more information on getting started with the Watson Developer Cloud and IBM Cloud.
+
+## Conversation
+
+With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
+
+To use Conversation with React Native, first creation your conversation bot and get your workspace_id.  Read this [quick tutorial](https://www.ibm.com/blogs/watson/2016/12/build-chat-bot/) on creating a bot.
+
+The following example shows how to start a conversation with the Conversation service:
+
+```javascript
+import { Conversation } from 'react-native-watson'
+
+Conversation.initialize( "user", "password" )
+
+// To start the conversation, send a message with only the workspaceId
+Conversation.message(workspaceId)
+            .then(response => {
+                console.log(JSON.stringify(response))
+                this.setState({output: response.output.text, context: response.context})
+            })
+            
+// To continue a conversation, and send the user's response, send the workspaceId and the input (text and saved context)
+
+let input = {
+                text: this.state.text,
+                context: this.state.context
+            }
+
+Conversation.message(this.workspaceId, input)
+    .then(response => {
+        console.log(JSON.stringify(response))
+        this.setState({output: response.output.text, context: response.context})
+    })
+```
 
 ## Text to Speech
 
