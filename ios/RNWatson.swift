@@ -1,16 +1,17 @@
 //
 //  Created by Patrick cremin on 8/2/17.
-//  Copyright © 2017 Facebook. All rights reserved.
 //
 
 import Foundation
+import ToneAnalyzerV3
 import TextToSpeechV1
 import SpeechToTextV1
-import ToneAnalyzerV3
 import VisualRecognitionV3
 import AVFoundation
 import AlchemyDataNewsV1
 import NaturalLanguageUnderstandingV1
+import ConversationV1
+import RestKit
 
 // TextToSpeech
 @objc(RNTextToSpeech)
@@ -135,7 +136,6 @@ class RNToneAnalyzer: NSObject {
     toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2017-08-22")
   }
   
-  //tones: [String], sentences: Bool,
   @objc func getTone(_ ofText: String,
                      resolver resolve: @escaping RCTPromiseResolveBlock,
                      rejecter reject: @escaping RCTPromiseRejectBlock) {
@@ -168,8 +168,6 @@ class RNNaturalLanguageUnderstanding: NSObject {
                             rejecter reject: @escaping RCTPromiseRejectBlock
     ) -> Void
   {
-    //let features = featuresAny as! [String: [String: Any]]
-    
     var conceptsOptions: ConceptsOptions?
     var emotionOptions: EmotionOptions?
     var entitiesOptions: EntitiesOptions?
@@ -231,67 +229,196 @@ class RNNaturalLanguageUnderstanding: NSObject {
   }
 }
 
-// VisualRecognition
-//@objc(RNVisualRecognition)
-//class RNVisualRecognition: NSObject {
-//
-//  var visualRecognition: VisualRecognition?
-//
-//  static let sharedInstance = RNVisualRecognition()
-//
-//  private override init() {}
-//
-//  @objc func initialize(_ apiKey: String) -> Void {
-//    visualRecognition = VisualRecognition(apiKey: apiKey, version: "2017-08-22")
-//  }
-//
-//
-//  @objc func classify(_ imageFiles: [String], config: [String: Any], resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-//
-//
-//    //public init(fileURLWithPath path: String, isDirectory: Bool, relativeTo base: URL?)
-//    // total number of images is limited to 20, with a max .zip size of 5 MB.
-//    //let files = imageFiles.flatMap { URL( fileURLWithPath: $0, isDirectory: false ) }
-//
-//    // TODO zip files and pass them to the api
-//    //      // TODO it is not necessary to zip if its a single file.
-//    //    Zip.quickZipPhotoFiles(imageFiles, fileName: "archive") { (error: ZipError?, zipPath: URL?) in
-//    //
-//    //        if((error) != nil)
-//    //        {
-//    //          reject(nil, nil, error)
-//    //        }
-//    //
-//    //        let failure = { (error: Error) in reject(nil, nil, error) }
-//    //
-//    //        self.visualRecognition?.classify(imageFile: zipPath!, owners: config["owners"] as? [String], classifierIDs: config["classifierIDs"] as? [String], threshold: config["threshold"] as? Double, language: config["language"] as? String, failure: failure){ classifiedImages in
-//    //
-//    //          resolve(classifiedImages.toDictionary())
-//    //        }
-//    //
-//    //      }
-//  }
-//
-//  /**
-//   Upload and detect faces in an image or multiple images in a compressed (.zip) file. Each face
-//   is analyzed to estimate age, gender, celebrity name, and more.
-//
-//   - parameter inImageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-//   total number of images is limited to 20, with a max .zip size of 5 MB.
-//   - parameter failure: A function executed if an error occurs.
-//   - parameter success: A function executed with the image classifications.
-//   */
-//  @objc func detectFaces(inImageFile image: URL,
-//                         resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock)
-//  {
-//
-//  }
-//}
+
+// Conversation
+@objc(RNConversation)
+class RNConversation: NSObject {
+  
+  var conversation: Conversation?
+  
+  static let sharedInstance = RNConversation()
+  
+  private override init() {}
+  
+  @objc func initialize(_ username: String, password: String) -> Void {
+    conversation = Conversation(username: username, password: password, version: "2017-08-22")
+  }
+  
+  @objc func message(_ workspaceID: String,
+                     text: String?,
+                     contextJson: [String : Any]?,
+                     resolver resolve: @escaping RCTPromiseResolveBlock,
+                     rejecter reject: @escaping RCTPromiseRejectBlock) {
+    
+    let failure = { (error: Error) in reject(nil, nil, error) }
+    
+    var input: Input?
+    var context: Context?
+    
+    if(text != nil)
+    {
+      input = Input(text: text!)
+    }
+    
+    if(contextJson != nil)
+    {
+      let json = RestKit.JSON(dictionary: contextJson!)
+      do{
+      context = try Context(json: json)
+      }
+      catch {
+        print(error)
+      }
+    }
+    
+    let request = MessageRequest(input: input, context: context)
+    
+    conversation?.message(withWorkspace: workspaceID, request: request, failure: failure ) { response in
+      print(response.output.text)
+      resolve(response.toDictionary())
+    }
+  }
+}
 
 
 // Mappings
-// TODO may be better to use Codable instead
 
+/////////////////////////////////////////////////////////////////////////////////
+// ConversationV1
+/////////////////////////////////////////////////////////////////////////////////
+
+extension ConversationV1.MessageResponse : Serializable {
+  var properties: Array<String> {
+    return ["input", "alternateIntents", "context", "entities", "intents", "output"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "input":
+      return input
+    case "alternateIntents":
+      return alternateIntents
+    case "context":
+      return context
+    case "entities":
+      return entities
+    case "intents":
+      return intents
+    case "output":
+      return output
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.Input : Serializable {
+  var properties: Array<String> {
+    return ["text"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "text":
+      return text
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.Context : Serializable {
+  var properties: Array<String> {
+    return ["conversationID", "system", ]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "conversationID":
+      return conversationID
+    case "system":
+      return system
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.System : Serializable {
+  var properties: Array<String> {
+    return ["dialogStack", "dialogTurnCounter", "dialogRequestCounter"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "dialogStack":
+      return dialogStack
+    case "dialogTurnCounter":
+      return dialogTurnCounter
+    case "dialogRequestCounter":
+      return dialogRequestCounter
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.Entity : Serializable {
+  var properties: Array<String> {
+    return ["entity", "startIndex", "endIndex", "value"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "entity":
+      return entity
+    case "startIndex":
+      return startIndex
+    case "endIndex":
+      return endIndex
+    case "value":
+      return value
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.Intent : Serializable {
+  var properties: Array<String> {
+    return ["intent", "confidence"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "intent":
+      return intent
+    case "confidence":
+      return confidence
+    default:
+      return nil
+    }
+  }
+}
+
+extension ConversationV1.Output : Serializable {
+  var properties: Array<String> {
+    return ["logMessages", "text", "nodesVisited"]
+  }
+  
+  func valueForKey(key: String) -> Any? {
+    switch key {
+    case "logMessages":
+      return logMessages
+    case "text":
+      return text
+    case "nodesVisited":
+      return nodesVisited
+    default:
+      return nil
+    }
+  }
+}
 
 /////////////////////////////////////////////////////////////////////////////////
 // NaturalLanguageUnderstandingV1

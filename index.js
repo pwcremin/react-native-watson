@@ -5,6 +5,7 @@ let {
     RNSpeechToText,
     RNToneAnalyzer,
     RNNaturalLanguageUnderstanding,
+    RNConversation
 } = NativeModules
 
 module.exports = {
@@ -22,7 +23,43 @@ module.exports = {
         getVoices: function ()
         {
             return RNTextToSpeech.getVoices();
+        }
+    },
+
+    Conversation: {
+        initialize: function ( username, password )
+        {
+            RNConversation.initialize( username, password );
         },
+
+        message: function ( workspaceId, input )
+        {
+            input = input || {}
+
+            return RNConversation.message( workspaceId, input )
+                .then(response =>
+                {
+                    if(Platform.OS === "android")
+                    {
+                        response = JSON.parse(response)
+                    }
+                    else if(Platform.OS === "ios" && response.context)
+                    {
+                        // need to correct key names
+                        response.context.conversation_id = response.context.conversationID
+                        delete response.context.conversationID
+                        response.context.system.dialog_turn_counter = response.context.system.dialogTurnCounter
+                        delete response.context.system.dialogTurnCounter
+                        response.context.system.dialog_stack = response.context.system.dialogStack
+                        delete response.context.system.dialogStack
+                        response.context.system.dialog_request_counter = response.context.system.dialogRequestCounter
+                        delete response.context.system.dialogRequestCounter
+                    }
+
+                    return response
+                });
+
+        }
     },
 
     SpeechToText: {

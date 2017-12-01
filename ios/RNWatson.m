@@ -53,3 +53,12 @@ RCT_EXTERN_METHOD(analyzeContent:(NSDictionary *)contentToAnalyze featuresDict:(
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 @end
+
+@interface RCT_EXTERN_MODULE(RNConversation, NSObject)
+
+RCT_EXTERN_METHOD(initialize:(NSString *)username password:(NSString *)password)
+
+RCT_EXTERN_METHOD(message:(NSString *)workspaceID text:(NSString *) text contextJson:(NSDictionary *)contextJson
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+@end
