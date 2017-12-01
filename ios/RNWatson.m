@@ -58,7 +58,7 @@ RCT_EXTERN_METHOD(analyzeContent:(NSDictionary *)contentToAnalyze featuresDict:(
 
 RCT_EXTERN_METHOD(initialize:(NSString *)username password:(NSString *)password)
 
-RCT_EXTERN_METHOD(message:(NSString *)workspaceID text:(NSString *) text contextJson:(NSDictionary *)contextJson
+RCT_EXTERN_METHOD(message:(NSString *)workspaceID inputDict: (NSDictionary *) inputDict
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 @end

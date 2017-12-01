@@ -74,9 +74,7 @@ public class RNConversationModule extends ReactContextBaseJavaModule {
                 optionsBuilder.context(context);
             }
 
-
             MessageResponse response = service.message(optionsBuilder.build()).execute();
-            System.out.println(response);
 
             promise.resolve(response.toString());
         }

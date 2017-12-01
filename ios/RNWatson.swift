@@ -245,8 +245,7 @@ class RNConversation: NSObject {
   }
   
   @objc func message(_ workspaceID: String,
-                     text: String?,
-                     contextJson: [String : Any]?,
+                     inputDict: [String : Any]?,                     
                      resolver resolve: @escaping RCTPromiseResolveBlock,
                      rejecter reject: @escaping RCTPromiseRejectBlock) {
     
@@ -255,26 +254,24 @@ class RNConversation: NSObject {
     var input: Input?
     var context: Context?
     
-    if(text != nil)
-    {
-      input = Input(text: text!)
+    if let text = inputDict?["text"] as? String {
+      input = Input(text: text)
     }
     
-    if(contextJson != nil)
-    {
-      let json = RestKit.JSON(dictionary: contextJson!)
+    if let contextDict = inputDict?["context"] as? [String : Any] {
+      let json = RestKit.JSON(dictionary: contextDict)
       do{
-      context = try Context(json: json)
+        context = try Context(json: json)
       }
       catch {
-        print(error)
+        reject(nil, nil, error)
+        return
       }
     }
     
     let request = MessageRequest(input: input, context: context)
     
     conversation?.message(withWorkspace: workspaceID, request: request, failure: failure ) { response in
-      print(response.output.text)
       resolve(response.toDictionary())
     }
   }
