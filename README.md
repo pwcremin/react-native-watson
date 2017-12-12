@@ -158,6 +158,8 @@ TextToSpeech.getVoices()
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. 
 
+Android: Do not forget to add the neccessary permissions to your manifest ```<uses-permission android:name="android.permission.RECORD_AUDIO"/>```
+
 ```javascript
 import {SpeechToText} from 'react-native-watson';
 
