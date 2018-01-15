@@ -13,6 +13,8 @@ React Native module (ios and android) for using select Watson services.  Access 
 * [Tone Analyzer](#tone-analyzer)
 * [Natural Language Understanding](#natural-language-understanding)
 
+If you would like to see more services implemented please create an issue for it.
+
 ## Install
 
 ```shell
