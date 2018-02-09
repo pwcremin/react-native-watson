@@ -29,7 +29,7 @@ import java.util.List;
 public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     private ReactApplicationContext reactContext;
-    private TextToSpeech service;
+    private TextToSpeech service;// = new TextToSpeech();
     private AudioTrack audioTrack;
 
     private StreamingTask mStreamingTask;
@@ -114,7 +114,8 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
                         service.synthesize(
                                 text,
                                 new Voice(voiceName, null, null)
-                        ).execute());
+                        ).execute()
+                );
 
             } catch (Exception e) {
                 System.err.println("Error: RNTextToSpeech doInBackground couldn't play stream!");
