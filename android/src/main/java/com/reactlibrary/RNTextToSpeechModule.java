@@ -58,26 +58,20 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void synthesize(String text, String voice, Promise promise) {
+        if (mStreamingTask != null) {
+            // will return if mStreamingTask already processing
+            return;
+        }
 
         String voiceName = voice;
 
-        if(voiceName == null || voiceName.isEmpty())
-        {
+        if (voiceName == null || voiceName.isEmpty()) {
             voiceName = "en-US_AllisonVoice";
         }
 
-        try {
-
-            StreamPlayer streamPlayer = new StreamPlayer();
-
-            streamPlayer.playStream(service.synthesize(text, new Voice(voiceName, null, null)).execute());
-
-            promise.resolve(true);
-
-        } catch (Exception e) {
-            promise.reject(e);
-        }
-
+        mStreamingTask = new StreamingTask();
+        mStreamingTask.initStreamingTask(text, voiceName, promise);
+        mStreamingTask.execute();
     }
 
     @ReactMethod
@@ -90,6 +84,47 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
             );
         } catch (Exception e) {
             promise.reject(null, e);
+        }
+    }
+
+
+    /**
+     * Places the text to speech operation onto a separate thread so UI thread doesn't
+     * have to wait for the speech stream to finish.
+     */
+    private class StreamingTask extends AsyncTask<Void, Integer, Long> {
+        String text;
+        String voiceName;
+        Promise promise;
+
+        protected void initStreamingTask(String text, String voiceName, Promise promise) {
+            this.text = text;
+            this.voiceName = voiceName;
+            this.promise = promise;
+        }
+
+        @Override
+        protected Long doInBackground(Void... voids) {
+            try {
+                StreamPlayer streamPlayer = new StreamPlayer();
+
+                streamPlayer.playStream(
+                        service.synthesize(
+                                text,
+                                new Voice(voiceName, null, null)
+                        ).execute());
+
+            } catch (Exception e) {
+                System.err.println("Error: RNTextToSpeech doInBackground couldn't play stream!");
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Long result) {
+            promise.resolve(true);
+            mStreamingTask = null;
         }
     }
 }
