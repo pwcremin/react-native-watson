@@ -4,6 +4,7 @@ package com.reactlibrary;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.AsyncTask;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -28,8 +29,10 @@ import java.util.List;
 public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     private ReactApplicationContext reactContext;
-    private TextToSpeech service;// = new TextToSpeech();
+    private TextToSpeech service;
     private AudioTrack audioTrack;
+
+    private StreamingTask mStreamingTask;
 
     public RNTextToSpeechModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -60,6 +63,7 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
     public void synthesize(String text, String voice, Promise promise) {
         if (mStreamingTask != null) {
             // will return if mStreamingTask already processing
+            // otherwise mStreamingTask will set itself to null once finished
             return;
         }
 
@@ -69,8 +73,7 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
             voiceName = "en-US_AllisonVoice";
         }
 
-        mStreamingTask = new StreamingTask();
-        mStreamingTask.initStreamingTask(text, voiceName, promise);
+        mStreamingTask = new StreamingTask(text, voiceName, promise);
         mStreamingTask.execute();
     }
 
@@ -87,17 +90,16 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
         }
     }
 
-
     /**
      * Places the text to speech operation onto a separate thread so UI thread doesn't
      * have to wait for the speech stream to finish.
      */
     private class StreamingTask extends AsyncTask<Void, Integer, Long> {
-        String text;
-        String voiceName;
-        Promise promise;
+        private String text;
+        private String voiceName;
+        private Promise promise;
 
-        protected void initStreamingTask(String text, String voiceName, Promise promise) {
+        public StreamingTask(String text, String voiceName, Promise promise) {
             this.text = text;
             this.voiceName = voiceName;
             this.promise = promise;
