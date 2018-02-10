@@ -94,7 +94,7 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
      * Places the text to speech operation onto a separate thread so UI thread doesn't
      * have to wait for the speech stream to finish.
      */
-    private class StreamingTask extends AsyncTask<Void, Integer, Long> {
+    private class StreamingTask extends AsyncTask<Void, Integer, Boolean> {
         private String text;
         private String voiceName;
         private Promise promise;
@@ -106,7 +106,7 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        protected Long doInBackground(Void... voids) {
+        protected Boolean doInBackground(Void... voids) {
             try {
                 StreamPlayer streamPlayer = new StreamPlayer();
 
@@ -117,17 +117,17 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
                         ).execute()
                 );
 
+                return true;
             } catch (Exception e) {
                 System.err.println("Error: RNTextToSpeech doInBackground couldn't play stream!");
+                return false;
             }
-
-            return null;
         }
 
         @Override
-        protected void onPostExecute(Long result) {
-            promise.resolve(true);
-            mStreamingTask = null;
+        protected void onPostExecute(Boolean result) {
+            promise.resolve(result);
+            mStreamingTask = null;  // null to indicate task can be reinitialize for a new task
         }
     }
 }
