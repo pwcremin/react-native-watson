@@ -4,6 +4,7 @@ package com.reactlibrary;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.AsyncTask;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -30,6 +31,8 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
     private ReactApplicationContext reactContext;
     private TextToSpeech service;// = new TextToSpeech();
     private AudioTrack audioTrack;
+
+    private StreamingTask mStreamingTask;
 
     public RNTextToSpeechModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -58,26 +61,20 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void synthesize(String text, String voice, Promise promise) {
+        if (mStreamingTask != null) {
+            // will return if mStreamingTask already processing
+            // otherwise mStreamingTask will set itself to null once finished
+            return;
+        }
 
         String voiceName = voice;
 
-        if(voiceName == null || voiceName.isEmpty())
-        {
+        if (voiceName == null || voiceName.isEmpty()) {
             voiceName = "en-US_AllisonVoice";
         }
 
-        try {
-
-            StreamPlayer streamPlayer = new StreamPlayer();
-
-            streamPlayer.playStream(service.synthesize(text, new Voice(voiceName, null, null)).execute());
-
-            promise.resolve(true);
-
-        } catch (Exception e) {
-            promise.reject(e);
-        }
-
+        mStreamingTask = new StreamingTask(text, voiceName, promise);
+        mStreamingTask.execute();
     }
 
     @ReactMethod
@@ -90,6 +87,47 @@ public class RNTextToSpeechModule extends ReactContextBaseJavaModule {
             );
         } catch (Exception e) {
             promise.reject(null, e);
+        }
+    }
+
+    /**
+     * Places the text to speech operation onto a separate thread so UI thread doesn't
+     * have to wait for the speech stream to finish.
+     */
+    private class StreamingTask extends AsyncTask<Void, Integer, Boolean> {
+        private String text;
+        private String voiceName;
+        private Promise promise;
+
+        public StreamingTask(String text, String voiceName, Promise promise) {
+            this.text = text;
+            this.voiceName = voiceName;
+            this.promise = promise;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                StreamPlayer streamPlayer = new StreamPlayer();
+
+                streamPlayer.playStream(
+                        service.synthesize(
+                                text,
+                                new Voice(voiceName, null, null)
+                        ).execute()
+                );
+
+                return true;
+            } catch (Exception e) {
+                System.err.println("Error: RNTextToSpeech doInBackground couldn't play stream!");
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            promise.resolve(result);
+            mStreamingTask = null;  // null to indicate task can be reinitialize for a new task
         }
     }
 }
