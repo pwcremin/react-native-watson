@@ -108,7 +108,7 @@ class RNSpeechToText: RCTEventEmitter {
     }
   }
 
-  @objc func setModel(_ modelName: String) -> Void {
+  @objc func changeModel(_ modelName: String) -> Void {
     speechToText?.getModels(success: {(models: [Model]) -> Void in
       for model in models {
         if model.name == modelName {
