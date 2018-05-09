@@ -79,6 +79,7 @@ class RNSpeechToText: RCTEventEmitter {
   var audioPlayer = AVAudioPlayer()
   var callback: RCTResponseSenderBlock?
   var hasListeners = false
+  var model: String?
   
   static let sharedInstance = RNSpeechToText()
   
@@ -99,12 +100,23 @@ class RNSpeechToText: RCTEventEmitter {
     
     let failure = { (error: Error) in errorCallback([error]) }
     
-    speechToText?.recognizeMicrophone(settings: settings, failure: failure) { results in
+    speechToText?.recognizeMicrophone(settings: settings, model: self.model, failure: failure) { results in
       if(self.hasListeners)
       {
         self.sendEvent(withName: "StreamingText", body: results.bestTranscript)
       }
     }
+  }
+
+  @objc func setModel(_ modelName: String) -> Void {
+    speechToText?.getModels(success: {(models: [Model]) -> Void in
+      for model in models {
+        if model.name == modelName {
+          self.model = model.name
+          break
+        }
+      }
+    })
   }
   
   @objc func stopStreaming() {
