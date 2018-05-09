@@ -80,6 +80,10 @@ module.exports = {
             RNSpeechToText.startStreaming( callback )
         },
 
+        changeModel(model){
+            RNSpeechToText.changeModel(model)
+        },
+
         stopStreaming()
         {
             this.subscription.remove()
