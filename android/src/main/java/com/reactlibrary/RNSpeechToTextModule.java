@@ -50,7 +50,7 @@ public class RNSpeechToTextModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void changeModel(String model){
-        // For a list of models visit
+        // For the list of models, see:
         // https://console.bluemix.net/docs/services/speech-to-text/input.html#models
 
         this.model = model;

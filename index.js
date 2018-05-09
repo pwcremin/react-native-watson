@@ -81,6 +81,8 @@ module.exports = {
         },
 
         changeModel(model){
+            // For the list of models, see:
+            // https://console.bluemix.net/docs/services/speech-to-text/input.html#models
             RNSpeechToText.changeModel(model)
         },
 

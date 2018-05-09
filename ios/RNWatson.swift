@@ -109,6 +109,8 @@ class RNSpeechToText: RCTEventEmitter {
   }
 
   @objc func changeModel(_ modelName: String) -> Void {
+    // For the list of models, see:
+    // https://console.bluemix.net/docs/services/speech-to-text/input.html#models
     speechToText?.getModels(success: {(models: [Model]) -> Void in
       for model in models {
         if model.name == modelName {
