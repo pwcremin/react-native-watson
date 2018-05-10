@@ -29,6 +29,7 @@ public class RNSpeechToTextModule extends ReactContextBaseJavaModule {
     private SpeechToText service = new SpeechToText();
     private MicrophoneInputStream capture;
     private Callback errorCallback;
+    private String model = "en-US_BroadbandModel";
 
     public RNSpeechToTextModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -45,6 +46,14 @@ public class RNSpeechToTextModule extends ReactContextBaseJavaModule {
     public void initialize(String username, String password) {
         service.setUsernameAndPassword(username, password);
         service.setEndPoint("https://stream.watsonplatform.net/speech-to-text/api");
+    }
+
+    @ReactMethod
+    public void changeModel(String model){
+        // For the list of models, see:
+        // https://console.bluemix.net/docs/services/speech-to-text/input.html#models
+
+        this.model = model;
     }
 
     @ReactMethod
@@ -73,7 +82,7 @@ public class RNSpeechToTextModule extends ReactContextBaseJavaModule {
     private RecognizeOptions getRecognizeOptions() {
         return new RecognizeOptions.Builder()
                 .contentType(ContentType.OPUS.toString())
-                .model("en-US_BroadbandModel")
+                .model(model)
                 .interimResults(true)
                 .inactivityTimeout(2000)
                 .build();
